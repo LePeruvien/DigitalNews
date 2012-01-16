@@ -10,6 +10,7 @@ View::View(QGraphicsScene *parent) : QGraphicsView(parent) {
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     _topBar = new TopBar;
     _topBar->setPos(0, 0);
+    scene()->addItem(_topBar);
     _cptArticles = 0;
 }
 
