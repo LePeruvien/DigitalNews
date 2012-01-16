@@ -3,3 +3,4 @@ Makefile
 *.pro.user
 moc_*
 DigitalNews
+.DS_Store
