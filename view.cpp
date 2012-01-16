@@ -2,7 +2,6 @@
 
 #include "button.hpp"
 
-#include <QtCore/QDebug>
 #include <QtCore/QPropertyAnimation>
 
 View::View(QGraphicsScene *parent) : QGraphicsView(parent) {
@@ -33,11 +32,11 @@ void View::articleClicked() {
     animation->setDuration(750);
     animation->setEasingCurve(QEasingCurve::OutExpo);
     if (btn->isFront()) {
-        btn->setFront(false);
         animation->setStartValue(btn->geometry());
         animation->setEndValue(btn->gridGeometry());
+        connect(animation, SIGNAL(finished()), btn, SLOT(setBack()));
     } else {
-        btn->setFront(true);
+        btn->setFront();
         btn->setGridGeometry(btn->geometry());
         animation->setStartValue(btn->geometry());
         animation->setEndValue(QRectF(15, 15, 670, 670));

@@ -18,10 +18,6 @@ public:
         return _front;
     }
 
-    inline void setFront(bool front) {
-        _front = front;
-    }
-
     inline QRectF gridGeometry() const {
         return _gridGeometry;
     }
@@ -29,6 +25,10 @@ public:
     inline void setGridGeometry(const QRectF &geometry) {
         _gridGeometry = geometry;
     }
+
+public slots:
+    void setBack();
+    void setFront();
 
 signals:
     void pressed();

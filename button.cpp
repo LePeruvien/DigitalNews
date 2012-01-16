@@ -36,6 +36,16 @@ void Button::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     //painter->drawPixmap(-_pix.width() / 2, -_pix.height() / 2, _pix);
 }
 
+void Button::setBack() {
+    _front = false;
+    setZValue(0);
+}
+
+void Button::setFront() {
+    _front = true;
+    setZValue(1);
+}
+
 void Button::mousePressEvent(QGraphicsSceneMouseEvent *) {
     emit pressed();
     update();
