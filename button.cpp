@@ -11,7 +11,7 @@ Button::Button(const QPixmap &pixmap, QGraphicsItem *parent) : QGraphicsWidget(p
 
 QPainterPath Button::shape() const {
     QPainterPath path;
-    path.addEllipse(boundingRect());
+    path.addRect(boundingRect());
     return path;
 }
 
@@ -19,8 +19,7 @@ void Button::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     bool down = option->state & QStyle::State_Sunken;
     QRectF r = boundingRect();
     QLinearGradient grad(r.topLeft(), r.bottomRight());
-    //grad.setColorAt(down ? 1 : 0, option->state & QStyle::State_MouseOver ? Qt::white : Qt::lightGray);
-    grad.setColorAt(down ? 1 : 0, Qt::lightGray);
+    grad.setColorAt(down ? 1 : 0, option->state & QStyle::State_MouseOver ? Qt::white : Qt::lightGray);
     grad.setColorAt(down ? 0 : 1, Qt::darkGray);
     painter->setPen(Qt::darkGray);
     painter->setBrush(grad);

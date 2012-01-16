@@ -23,7 +23,7 @@ private slots:
     void articleClicked();
 
 private:
-     //TopBar*      _topBar;
+    TopBar*         _topBar;
     unsigned int    _cptArticles;
 };
 

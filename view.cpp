@@ -2,10 +2,14 @@
 
 #include "button.hpp"
 
+#include "topbar.hpp"
+
 #include <QtCore/QPropertyAnimation>
 
 View::View(QGraphicsScene *parent) : QGraphicsView(parent) {
-    //_topBar = new TopBar();
+    setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    _topBar = new TopBar;
+    _topBar->setPos(0, 0);
     _cptArticles = 0;
 }
 

@@ -6,6 +6,9 @@
 class TopBar : public QGraphicsPixmapItem {
 public:
     explicit TopBar();
+
+protected:
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif // TOPBAR_HPP
