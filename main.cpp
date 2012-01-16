@@ -12,13 +12,13 @@
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
-    QGraphicsScene scene(0, 0, 700, 700);
+    QGraphicsScene scene(0, 0, 700, 730);
 
     Article article;
     article.setContent("Test d'article un peu long");
 
     View v(&scene);
-    v.resize(700, 700);
+    v.resize(700, 730);
     v.show();
 
     for (unsigned int i = 0; i < 9; ++i)

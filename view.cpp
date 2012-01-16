@@ -13,7 +13,7 @@ void View::addArticle(const Article &article) {
     Button *btn = new Button(article.draw(QRect(0, 0, 700 / 3, 700 / 3)));
     connect(btn, SIGNAL(pressed()), this, SLOT(articleClicked()));
     btn->resize(700 / 3, 700 / 3);
-    btn->setPos((_cptArticles % 3) * (700 / 3), (_cptArticles / 3) * (700 / 3));
+    btn->setPos((_cptArticles % 3) * (700 / 3), (_cptArticles / 3) * (700 / 3) + 30);
     scene()->addItem(btn);
     ++_cptArticles;
 }
@@ -39,7 +39,7 @@ void View::articleClicked() {
         btn->setFront();
         btn->setGridGeometry(btn->geometry());
         animation->setStartValue(btn->geometry());
-        animation->setEndValue(QRectF(15, 15, 670, 670));
+        animation->setEndValue(QRectF(15, 45, 670, 670));
     }
     animation->start();
 }
