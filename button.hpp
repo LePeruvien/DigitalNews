@@ -14,6 +14,22 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 
+    inline bool isFront() const {
+        return _front;
+    }
+
+    inline void setFront(bool front) {
+        _front = front;
+    }
+
+    inline QRectF gridGeometry() const {
+        return _gridGeometry;
+    }
+
+    inline void setGridGeometry(const QRectF &geometry) {
+        _gridGeometry = geometry;
+    }
+
 signals:
     void pressed();
 
@@ -23,6 +39,8 @@ protected:
 
 private:
     QPixmap _pix;
+    bool    _front;
+    QRectF  _gridGeometry;
 };
 
 #endif // BUTTON_HPP

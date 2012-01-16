@@ -5,10 +5,12 @@ CONFIG += console
 SOURCES += main.cpp \
     view.cpp \
     button.cpp \
-    article.cpp
+    article.cpp \
+    topbar.cpp
 
 HEADERS += \
     view.hpp \
     button.hpp \
-    article.hpp
+    article.hpp \
+    topbar.hpp
 

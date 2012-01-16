@@ -6,6 +6,7 @@
 Button::Button(const QPixmap &pixmap, QGraphicsItem *parent) : QGraphicsWidget(parent), _pix(pixmap) {
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
+    _front = false;
 }
 
 QPainterPath Button::shape() const {

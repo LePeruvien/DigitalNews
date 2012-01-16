@@ -16,6 +16,12 @@ public:
 
     void addArticle(const Article &article);
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
+private slots:
+    void articleClicked();
+
 private:
      //TopBar*      _topBar;
     unsigned int    _cptArticles;

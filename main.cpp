@@ -5,6 +5,10 @@
 #include "button.hpp"
 #include "view.hpp"
 
+
+#include <QtCore/QPropertyAnimation>
+#include <QtGui/QPushButton>
+
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
@@ -14,7 +18,7 @@ int main(int argc, char* argv[]) {
     article.setContent("Test d'article un peu long");
 
     View v(&scene);
-    v.resize(715, 700);
+    v.resize(700, 700);
     v.show();
 
     for (unsigned int i = 0; i < 9; ++i)
