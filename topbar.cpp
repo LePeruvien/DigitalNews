@@ -1,5 +1,6 @@
 #include "topbar.hpp"
 
+#include <QtCore/QTime>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 
@@ -12,5 +13,5 @@ TopBar::TopBar() : QGraphicsPixmapItem() {
 void TopBar::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     QGraphicsPixmapItem::paint(painter, option, widget);
     painter->setPen(Qt::black);
-    painter->drawText(650, 0, 50, 30, Qt::AlignCenter | Qt::TextWordWrap, "13:37");
+    painter->drawText(650, 0, 50, 30, Qt::AlignCenter | Qt::TextWordWrap, QTime::currentTime().toString("hh:mm"));
 }
