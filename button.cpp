@@ -21,14 +21,14 @@ void Button::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     bool down = option->state & QStyle::State_Sunken;
     QRectF r = boundingRect();
     painter->setPen(Qt::NoPen);
-    painter->setBrush(Settings::backroundButton());
+    painter->setBrush(_front ? Settings::articleBackgroundColor() : Settings::backroundButton());
     painter->drawRect(r);
     painter->setBrush(Qt::NoBrush);
     if (option->state & QStyle::State_MouseOver) {
-        painter->setPen(QPen(Settings::backgroundColor(), 3));
+        painter->setPen(QPen(Settings::topBackroundColor(), 3));
         painter->drawRect(r);
     } else {
-        painter->setPen(QPen(Settings::backgroundColor(), 1));
+        painter->setPen(QPen(Settings::topBackroundColor(), 1));
         painter->drawRect(r);
     }
     /*grad.setColorAt(down ? 1 : 0, Qt::darkGray);

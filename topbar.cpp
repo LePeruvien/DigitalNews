@@ -14,7 +14,7 @@ TopBar::TopBar(const QSize &size) : QGraphicsPixmapItem(), _size(size) {
 
 void TopBar::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     QGraphicsPixmapItem::paint(painter, option, widget);
-    painter->setPen(Settings::foregroundColor());
+    painter->setPen(Settings::hourColor());
     QFont f;
     f.setStyleHint(QFont::Helvetica);
     f.setPointSize(15);
