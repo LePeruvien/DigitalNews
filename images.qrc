@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="newsIcon">images/icons/logo_news_100x100.png</file>
+        <file alias="advertsIcon">images/icons/logo_pub_100x100.png</file>
+        <file alias="sportIcon">images/icons/logo_sport100x100.png</file>
+        <file alias="cultureIcon">images/icons/logo_culturel1_100x100.png</file>
+        <file alias="economyIcon">images/icons/logo-euros_100x100.jpg</file>
+    </qresource>
+</RCC>

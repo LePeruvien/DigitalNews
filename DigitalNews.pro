@@ -16,3 +16,6 @@ HEADERS += \
     topbar.hpp \
     settings.hpp
 
+RESOURCES += \
+    images.qrc
+
