@@ -12,6 +12,10 @@ public:
     static QColor foregroundColor() {
         return QColor(0xFF, 0xCA, 0xCA);
     }
+
+    static QColor topBackroundColor() {
+        return QColor(0xCC, 0x00, 0x00);
+    }
 };
 
 #endif // SETTINGS_HPP

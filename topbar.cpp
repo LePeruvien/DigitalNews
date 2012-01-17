@@ -8,7 +8,7 @@
 
 TopBar::TopBar(const QSize &size) : QGraphicsPixmapItem(), _size(size) {
     QPixmap pix(_size);
-    pix.fill(Settings::backgroundColor());
+    pix.fill(Settings::topBackroundColor());
     setPixmap(pix);
 }
 
