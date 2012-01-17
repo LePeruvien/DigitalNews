@@ -8,7 +8,15 @@
 
 TopBar::TopBar(const QSize &size) : QGraphicsPixmapItem(), _size(size) {
     QPixmap pix(_size);
-    pix.fill(Settings::topBackroundColor());
+    pix.fill(Qt::transparent);
+    QPainter p(&pix);
+    p.setPen(Settings::topBackroundColor());
+    p.setBrush(Settings::topBackroundColor());
+    p.drawEllipse(0, 0, size.height(), size.height());
+    p.drawEllipse(size.width() - size.height(), 0, size.height(), size.height());
+    p.drawRect(0, size.height() / 2, size.width(), size.height() / 2);
+    p.drawRect(size.height() / 2, 0, size.width() - size.height(), size.height() / 2);
+    p.end();
     setPixmap(pix);
 }
 
