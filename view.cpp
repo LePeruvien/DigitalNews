@@ -6,9 +6,10 @@
 
 #include <QtCore/QPropertyAnimation>
 
-View::View(QGraphicsScene *parent) : QGraphicsView(parent) {
+View::View(QGraphicsScene *parent, const QSize &size) : QGraphicsView(parent) {
+    resize(size);
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    _topBar = new TopBar;
+    _topBar = new TopBar(QSize(size.width(), size.height() / 15));
     _topBar->setPos(0, 0);
     scene()->addItem(_topBar);
     _cptArticles = 0;
@@ -16,10 +17,12 @@ View::View(QGraphicsScene *parent) : QGraphicsView(parent) {
 }
 
 void View::addArticle(const Article &article) {
-    Button *btn = new Button(article.draw(QRect(0, 0, 700 / 3, 700 / 3)));
+    unsigned int w = size().width() / 3;
+    unsigned int h = (size().height() - _topBar->size().height()) / 3;
+    Button *btn = new Button(article.draw(QRect(0, 0, w, h)));
     connect(btn, SIGNAL(pressed()), this, SLOT(articleClicked()));
-    btn->resize(700 / 3, 700 / 3);
-    btn->setPos((_cptArticles % 3) * (700 / 3), (_cptArticles / 3) * (700 / 3) + 30);
+    btn->resize(w, h);
+    btn->setPos((_cptArticles % 3) * (w), (_cptArticles / 3) * h + _topBar->size().height());
     scene()->addItem(btn);
     ++_cptArticles;
 }
@@ -52,7 +55,9 @@ void View::articleClicked() {
         btn->setFront();
         btn->setGridGeometry(btn->geometry());
         animation->setStartValue(btn->geometry());
-        animation->setEndValue(QRectF(15, 45, 670, 670));
+        unsigned int w = size().width() / 15;
+        unsigned int h = (size().height() - _topBar->size().height()) / 15;
+        animation->setEndValue(QRectF(w, h + _topBar->size().height(), 13 * w, 13 * h));
         animation->start();
         _actButton = btn;
     }

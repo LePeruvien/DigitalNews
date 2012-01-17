@@ -13,7 +13,7 @@ class View : public QGraphicsView {
     Q_OBJECT
 
 public:
-    explicit View(QGraphicsScene *parent = 0);
+    explicit View(QGraphicsScene *parent = 0, const QSize &size = QSize());
 
     void addArticle(const Article &article);
 

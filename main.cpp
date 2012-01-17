@@ -1,4 +1,5 @@
 #include <QtGui/QApplication>
+#include <QtGui/QDesktopWidget>
 #include <QtGui/QGraphicsScene>
 
 #include "article.hpp"
@@ -12,14 +13,14 @@
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
-    QGraphicsScene scene(0, 0, 700, 730);
+    const QRect screen = QApplication::desktop()->screenGeometry();
+    QGraphicsScene scene(screen);
 
     Article article;
     article.setContent("Test d'article un peu long");
 
-    View v(&scene);
-    v.resize(700, 730);
-    v.show();
+    View v(&scene, screen.size());
+    v.showFullScreen();
 
     for (unsigned int i = 0; i < 9; ++i)
         v.addArticle(article);
