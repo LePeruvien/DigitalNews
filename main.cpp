@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     QGraphicsScene scene(screen);
 
     Article article;
-    article.setContent("Test d'article un peu long");
+	article.setContent("Title", "Test d'article un peu long", Article::Economy);
 
     View v(&scene, screen.size());
     v.showFullScreen();
