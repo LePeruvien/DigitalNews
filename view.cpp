@@ -57,9 +57,9 @@ void View::articleClicked() {
         btn->setFront();
         btn->setGridGeometry(btn->geometry());
         animation->setStartValue(btn->geometry());
-        unsigned int w = size().width() / 15;
+        unsigned int w = size().width() / 17;
         unsigned int h = (size().height() - _topBar->size().height()) / 15;
-        animation->setEndValue(QRectF(w, h + _topBar->size().height(), 13 * w, 13 * h));
+        animation->setEndValue(QRectF(w, h + _topBar->size().height(), 15 * w, 13 * h));
         animation->start();
         _actButton = btn;
     }
