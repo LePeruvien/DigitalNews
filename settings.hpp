@@ -16,6 +16,10 @@ public:
     static QColor topBackroundColor() {
         return QColor(0xCC, 0x00, 0x00);
     }
+
+    static QColor articleBackgroundColor() {
+        return QColor(0xFF, 0xFF, 0xFF, 0xFF);
+    }
 };
 
 #endif // SETTINGS_HPP

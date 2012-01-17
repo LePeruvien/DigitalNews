@@ -21,7 +21,7 @@ void Button::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     bool down = option->state & QStyle::State_Sunken;
     QRectF r = boundingRect();
     painter->setPen(Qt::NoPen);
-    painter->setBrush(Settings::foregroundColor());
+    painter->setBrush(_front ? Settings::articleBackgroundColor() : Settings::foregroundColor());
     painter->drawRect(r);
     painter->setBrush(Qt::NoBrush);
     if (option->state & QStyle::State_MouseOver) {
