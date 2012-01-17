@@ -6,11 +6,13 @@ SOURCES += main.cpp \
     view.cpp \
     button.cpp \
     article.cpp \
-    topbar.cpp
+    topbar.cpp \
+    settings.cpp
 
 HEADERS += \
     view.hpp \
     button.hpp \
     article.hpp \
-    topbar.hpp
+    topbar.hpp \
+    settings.hpp
 

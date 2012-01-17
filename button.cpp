@@ -1,5 +1,7 @@
 #include "button.hpp"
 
+#include "settings.hpp"
+
 #include <QtGui/QPainter>
 #include <QtGui/QStyleOptionGraphicsItem>
 
@@ -18,19 +20,24 @@ QPainterPath Button::shape() const {
 void Button::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
     bool down = option->state & QStyle::State_Sunken;
     QRectF r = boundingRect();
-    QLinearGradient grad(r.topLeft(), r.bottomRight());
-    grad.setColorAt(down ? 1 : 0, option->state & QStyle::State_MouseOver ? Qt::white : Qt::lightGray);
-    grad.setColorAt(down ? 0 : 1, Qt::darkGray);
-    painter->setPen(Qt::darkGray);
-    painter->setBrush(grad);
+    painter->setPen(Qt::NoPen);
+    painter->setBrush(Settings::foregroundColor());
     painter->drawRect(r);
-    grad.setColorAt(down ? 1 : 0, Qt::darkGray);
+    painter->setBrush(Qt::NoBrush);
+    if (option->state & QStyle::State_MouseOver) {
+        painter->setPen(QPen(Settings::backgroundColor(), 3));
+        painter->drawRect(r);
+    } else {
+        painter->setPen(QPen(Settings::backgroundColor(), 1));
+        painter->drawRect(r);
+    }
+    /*grad.setColorAt(down ? 1 : 0, Qt::darkGray);
     grad.setColorAt(down ? 0 : 1, Qt::lightGray);
     painter->setPen(Qt::NoPen);
     painter->setBrush(grad);
     if (down)
         painter->translate(2, 2);
-    painter->drawRect(r.adjusted(5, 5, -5, -5));
+    painter->drawRect(r.adjusted(5, 5, -5, -5));*/
     painter->drawPixmap(0, 0, _pix);
     //painter->drawPixmap(-_pix.width() / 2, -_pix.height() / 2, _pix);
 }
