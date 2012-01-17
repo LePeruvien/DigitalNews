@@ -6,6 +6,8 @@
 
 #include <QtCore/QPropertyAnimation>
 
+#include <QtCore/QDebug>
+
 View::View(QGraphicsScene *parent, const QSize &size) : QGraphicsView(parent) {
     resize(size);
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
@@ -46,7 +48,7 @@ void View::articleClicked() {
         animation->setEndValue(btn->gridGeometry());
         connect(animation, SIGNAL(finished()), btn, SLOT(setBack()));
         animation->start();
-        _actButton = NULL;
+		//_actButton = NULL;
     } else {
         if (_actButton != NULL && _actButton != btn) {
             delete animation;
@@ -61,5 +63,13 @@ void View::articleClicked() {
         animation->start();
         _actButton = btn;
     }
+	btn->setEnabled(false);
     connect(animation, SIGNAL(finished()), animation, SLOT(deleteLater()));
+	connect(animation, SIGNAL(finished()), this, SLOT(animationFinished()));
+}
+
+void View::animationFinished() {
+	_actButton->setEnabled(true);
+	if (!_actButton->isFront())
+		_actButton = NULL;
 }
