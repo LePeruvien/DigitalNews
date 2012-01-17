@@ -42,7 +42,7 @@ void Button::setBack() {
 
 void Button::setFront() {
     _front = true;
-    setZValue(1);
+    setZValue(2);
 }
 
 void Button::mousePressEvent(QGraphicsSceneMouseEvent *) {

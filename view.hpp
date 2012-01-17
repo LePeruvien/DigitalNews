@@ -1,6 +1,7 @@
 #ifndef VIEW_HPP
 #define VIEW_HPP
 
+class Button;
 class TopBar;
 
 #include "article.hpp"
@@ -25,6 +26,7 @@ private slots:
 private:
     TopBar*         _topBar;
     unsigned int    _cptArticles;
+    Button*         _actButton;
 };
 
 #endif // VIEW_HPP

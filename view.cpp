@@ -12,6 +12,7 @@ View::View(QGraphicsScene *parent) : QGraphicsView(parent) {
     _topBar->setPos(0, 0);
     scene()->addItem(_topBar);
     _cptArticles = 0;
+    _actButton = NULL;
 }
 
 void View::addArticle(const Article &article) {
@@ -37,14 +38,23 @@ void View::articleClicked() {
     animation->setDuration(750);
     animation->setEasingCurve(QEasingCurve::OutExpo);
     if (btn->isFront()) {
+        btn->setZValue(1);
         animation->setStartValue(btn->geometry());
         animation->setEndValue(btn->gridGeometry());
         connect(animation, SIGNAL(finished()), btn, SLOT(setBack()));
+        animation->start();
+        _actButton = NULL;
     } else {
+        if (_actButton != NULL && _actButton != btn) {
+            delete animation;
+            return;
+        }
         btn->setFront();
         btn->setGridGeometry(btn->geometry());
         animation->setStartValue(btn->geometry());
         animation->setEndValue(QRectF(15, 45, 670, 670));
+        animation->start();
+        _actButton = btn;
     }
-    animation->start();
+    connect(animation, SIGNAL(finished()), animation, SLOT(deleteLater()));
 }
