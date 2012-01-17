@@ -14,7 +14,11 @@ public:
     }
 
     static QColor topBackroundColor() {
-        return QColor(0xCC, 0x00, 0x00);
+        return QColor(0xBE, 0x00, 0x02);
+    }
+
+    static QColor backroundButton() {
+        return QColor(0xF0, 0xF0, 0xF0);
     }
 };
 
