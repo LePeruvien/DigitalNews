@@ -22,6 +22,7 @@ protected:
 
 private slots:
     void articleClicked();
+	void animationFinished();
 
 private:
     TopBar*         _topBar;
