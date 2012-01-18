@@ -1,4 +1,5 @@
 *.o
+qrc_*.cpp
 Makefile
 *.pro.user
 moc_*
