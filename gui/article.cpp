@@ -43,3 +43,20 @@ QPixmap Article::draw(const QRect &size) const {
     draw.end();
     return res;
 }
+
+QPixmap Article::drawPreview(const QRect &size) const {
+	QPixmap res(size.width(), size.height());
+	res.fill(Qt::transparent);
+
+	QRect titleAdjustedRect = size.adjusted(10, 25, size.width(), size.height());
+	int pixmapX = size.width() - 60;
+	int pixmapY = 10;
+
+	QPainter draw(&res);
+	draw.setPen(Qt::black);
+	draw.drawPixmap(pixmapX, pixmapY, 50, 50, *_icon);
+	draw.drawText(titleAdjustedRect, Qt::AlignTop | Qt::AlignLeft | Qt::TextWordWrap, _title);
+	draw.drawText(size, Qt::AlignCenter | Qt::TextWordWrap, _text);
+	draw.end();
+	return res;
+}
