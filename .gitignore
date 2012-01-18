@@ -1,6 +1,7 @@
 *.o
 *~
 *.so
+*.swp
 qrc_*.cpp
 Makefile
 *.pro.user
