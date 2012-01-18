@@ -9,6 +9,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 		string feed_url;
+		map<string, string> articles;
 
 		// validate arguments
   		if (argc == 2) 
@@ -27,7 +28,7 @@ int main(int argc, char* argv[])
 				FeedReader::Feed::Initialize();
 
 				// create custom feed config with the path of the xsl files
-				FeedReader::FeedConfig feedConfig("../xsl");
+				FeedReader::FeedConfig feedConfig("./xsl");
 
 				// optionally, customize the list of xsl files and feed types 
 				// feedConfig.m_feed_types.clear();
@@ -46,16 +47,24 @@ int main(int argc, char* argv[])
 				for (FeedReader::Feed::feed_element_iterator fitr = feedReader.begin_feed_elements();
 					 fitr != feedReader.end_feed_elements(); fitr++)
 				{
-					std::cout << fitr->first << ":	'" <<  fitr->second << "'" << endl;
+					// std::cout << fitr->first << ":	'" <<  fitr->second << "'" << endl;
 				}
 				
 				// print item elements
 				for (FeedReader::Feed::entry_iterator itr = feedReader.begin_entries();
 					 itr != feedReader.end_entries(); itr++)
 				{
-					std::cout << "Item ID: '"	<< itr->UniqueId	<< "'" << std::endl
-							  << "IsLive: '"	<< itr->IsLive		<< "'" << std::endl;
-					itr->Print(std::cout);
+				std::cout << "afficher un nouvel article" << std::endl;
+					// std::cout << "Item ID: '"	<< itr->UniqueId	<< "'" << std::endl
+							  // << "IsLive: '"	<< itr->IsLive		<< "'" << std::endl;
+					//itr->Print(std::cout);
+					for (FeedReader::Entry::entry_element_iterator itr2 = itr->begin_entry_elements(); itr2 != itr->end_entry_elements(); ++itr2) 		{
+						articles[itr2->first] = itr2->second;
+					}
+					for(map<string, string>::iterator it=articles.begin(); it!=articles.end(); ++it)
+					{
+						cout << it->first << " --- " << it->second << " --- " << endl;
+					}
 				}
         }
         catch (exception& e)
@@ -66,6 +75,6 @@ int main(int argc, char* argv[])
 		{
 			    cout << "Unknown exception." << "\n";
 		}
-
+		cout << articles.size() << " taille " << endl;
         return 0;
 }

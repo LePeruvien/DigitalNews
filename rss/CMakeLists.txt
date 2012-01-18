@@ -40,7 +40,7 @@ ADD_LIBRARY(
 )
 
 ADD_EXECUTABLE(
-	rss
+	rss-ivy
 	src/main.cpp
 )
 
