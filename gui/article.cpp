@@ -1,5 +1,6 @@
 #include "article.hpp"
 
+#include <QtGui/QApplication>
 #include <QtGui/QPainter>
 
 Article::Article() {
@@ -27,40 +28,33 @@ void Article::setContent(const QString &text) {
     _text = text;
 }
 
-QPixmap Article::draw(const QRect &size) const {
-    QPixmap res(size.width(), size.height());
-    res.fill(Qt::transparent);
-
+QPixmap Article::drawArticle(const QRect &size) const {
 	QRect titleAdjustedRect = QRect(10, 25, size.width() - 120, 60);
-	QRect contentAdjustedRect = size.adjusted(10, titleAdjustedRect.height() + 10, 0, 0);
-
-	int pixmapX = size.width() - 60;
-	int pixmapY = 10;
-
-    QPainter draw(&res);
-    draw.setPen(Qt::black);
-	draw.drawPixmap(pixmapX, pixmapY, 50, 50, *_icon);
-	draw.drawText(titleAdjustedRect, Qt::TextWordWrap, _title);
-	draw.drawText(contentAdjustedRect, Qt::TextWordWrap, _text);
-    draw.end();
-    return res;
+	QRect contentAdjustedRect = size.adjusted(10, titleAdjustedRect.height() + 10, -10, 0);
+	return draw(size, titleAdjustedRect, contentAdjustedRect);
 }
 
 QPixmap Article::drawPreview(const QRect &size) const {
+	QRect titleAdjustedRect = QRect(10, 25, size.width() - 120 , 60);
+	QRect contentAdjustedRect = size.adjusted(10, titleAdjustedRect.height() + 10, -10, 0);
+	return draw(size, titleAdjustedRect, contentAdjustedRect);
+}
+
+QPixmap Article::draw(const QRect &size, const QRect &titleRect, const QRect &contentRect) const {
 	QPixmap res(size.width(), size.height());
 	res.fill(Qt::transparent);
 
-	//QRect titleAdjustedRect = size.adjusted(10, 25, size.width() - 120 , 60);
-	QRect titleAdjustedRect = QRect(10, 25, size.width() - 120 , 60);
-	QRect contentAdjustedRect = size.adjusted(10, 85, 0, 0);
 	int pixmapX = size.width() - 60;
 	int pixmapY = 10;
 
 	QPainter draw(&res);
 	draw.setPen(Qt::black);
 	draw.drawPixmap(pixmapX, pixmapY, 50, 50, *_icon);
-	draw.drawText(titleAdjustedRect, Qt::TextWordWrap, _title);
-	draw.drawText(contentAdjustedRect, Qt::TextWordWrap, _text);
+	draw.drawText(contentRect, Qt::AlignJustify | Qt::TextWordWrap, _text);
+	QFont font = draw.font();
+	font.setBold(true);
+	draw.setFont(font);
+	draw.drawText(titleRect, Qt::AlignJustify | Qt::TextWordWrap, _title);
 	draw.end();
 	return res;
 }

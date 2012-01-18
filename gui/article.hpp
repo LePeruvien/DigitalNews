@@ -20,13 +20,15 @@ public:
 	void setContent(const QString &title, const QString &text, Topic topic);
     void setContent(const QString &text);
 
-    QPixmap draw(const QRect &size) const;
+	QPixmap drawArticle(const QRect &size) const;
 	QPixmap drawPreview(const QRect &size) const;
 
 private:
 	QString _title;
     QString _text;
 	QPixmap *_icon;
+
+	QPixmap draw(const QRect &size, const QRect &titleRect, const QRect &contentRect) const;
 };
 
 #endif // ARTICLE_HPP
