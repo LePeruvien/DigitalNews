@@ -1,7 +1,11 @@
 *.o
+*.so
 qrc_*.cpp
 Makefile
 *.pro.user
 moc_*
 DigitalNews
 .DS_Store
+cmake_install.cmake
+CMakeFiles
+CMakeCache.txt

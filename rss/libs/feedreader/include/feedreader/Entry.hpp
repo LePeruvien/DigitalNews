@@ -56,10 +56,10 @@ namespace FeedReader
 		bool						IsLive;
 
 	private:
-		void ParseNodeData(const ::xercesc_2_8::DOMNode* const entryNode);
+		void ParseNodeData(const ::xercesc_3_1::DOMNode* const entryNode);
 
 	public:
-		Entry(const xercesc_2_8::DOMNode* const entryNode);
+		Entry(const xercesc_3_1::DOMNode* const entryNode);
 		Entry(const Entry& other);
 		Entry& operator= (const Entry& other);
 

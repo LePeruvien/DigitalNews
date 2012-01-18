@@ -68,14 +68,14 @@ namespace FeedReader
 				}
 			}
 		}
-		catch (const xercesc_2_8::XMLException& e)
+		catch (const xercesc_3_1::XMLException& e)
 		{
 			std::stringstream msg;
 			msg << "An error occurred during feed parsing: '"
 				<< XmlCharsToStdString(e.getMessage());
 			throw feed_exception(msg.str());
 		}
-		catch (const xercesc_2_8::DOMException& e)
+		catch (const xercesc_3_1::DOMException& e)
 		{
 			const unsigned int maxChars = 2047;
 			XMLCh errText[maxChars + 1];
@@ -83,7 +83,7 @@ namespace FeedReader
 			std::stringstream msg;
 			msg << "DOM Error occurred during feed parsing. Code is:  " << e.code << ".";
 
-			if (xercesc_2_8::DOMImplementation::loadDOMExceptionMsg(e.code, errText, maxChars))
+			if (xercesc_3_1::DOMImplementation::loadDOMExceptionMsg(e.code, errText, maxChars))
 				msg << " Message is: " << XmlCharsToStdString(errText) << ".";
 			throw feed_exception(msg.str());
 		}
@@ -123,11 +123,11 @@ namespace FeedReader
 	void FeedValidator::TransformFeed(std::stringstream& xslStream, std::string& results)
 	{
 		std::stringstream result;
-		xalanc_1_10::XalanTransformer trans;
+		xalanc_1_11::XalanTransformer trans;
 		std::stringstream xmlStream(m_feedData);
-		const xalanc_1_10::XSLTInputSource xmlIn(xmlStream);
-		const xalanc_1_10::XSLTInputSource xslIn(xslStream);
-		const xalanc_1_10::XSLTResultTarget xmlOut(result);
+		const xalanc_1_11::XSLTInputSource xmlIn(xmlStream);
+		const xalanc_1_11::XSLTInputSource xslIn(xslStream);
+		const xalanc_1_11::XSLTResultTarget xmlOut(result);
 		
 		int	theResult = -1;
 		theResult = trans.transform(xmlIn, xslIn, xmlOut);
@@ -144,10 +144,10 @@ namespace FeedReader
 	bool FeedValidator::ValidateFeed(const std::string& feed) const
 	{
 		MemParseHandlers handler;
-		const xercesc_2_8::MemBufInputSource input(reinterpret_cast<const XMLByte*>(feed.c_str()), feed.size(), "c:/");
+		const xercesc_3_1::MemBufInputSource input(reinterpret_cast<const XMLByte*>(feed.c_str()), feed.size(), "c:/");
 
-		xercesc_2_8::XercesDOMParser parser;
-		parser.setValidationScheme(xercesc_2_8::XercesDOMParser::Val_Never);
+		xercesc_3_1::XercesDOMParser parser;
+		parser.setValidationScheme(xercesc_3_1::XercesDOMParser::Val_Never);
 		parser.setErrorHandler(&handler);
 
 		parser.parse(input);

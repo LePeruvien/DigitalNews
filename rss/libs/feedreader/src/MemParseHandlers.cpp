@@ -34,7 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "MemParseHandlers.hpp"
 
 MemParseHandlers::MemParseHandlers() :
-	xercesc_2_8::HandlerBase(),
+	xercesc_3_1::HandlerBase(),
 	_success(true)
 {
 }
@@ -44,12 +44,12 @@ bool MemParseHandlers::GetSuccess()
 	return _success;
 }
 
-void MemParseHandlers::error(const xercesc_2_8::SAXParseException& ex)
+void MemParseHandlers::error(const xercesc_3_1::SAXParseException& ex)
 {
 	_success = false;
 }
 
-void MemParseHandlers::fatalError(const xercesc_2_8::SAXParseException& ex)
+void MemParseHandlers::fatalError(const xercesc_3_1::SAXParseException& ex)
 {
 	const XMLCh* foo = ex.getMessage();
 	_success = false;

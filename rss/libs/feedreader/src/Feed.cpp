@@ -46,7 +46,7 @@ POSSIBILITY OF SUCH DAMAGE.
 namespace FeedReader
 {
 	bool Feed::m_initialized = false;
-	boost::recursive_mutex Feed::m_stateMutex = boost::recursive_mutex();
+	boost::recursive_mutex Feed::m_stateMutex;
 
 	Feed::Feed(const std::string& url, const FeedConfig& feedConfig) :
 		m_etag(),
@@ -123,10 +123,10 @@ namespace FeedReader
 
 	void Feed::CreateEntries(const std::string& feedData)
 	{
-		const xercesc_2_8::MemBufInputSource input(reinterpret_cast<const XMLByte*>(
+		const xercesc_3_1::MemBufInputSource input(reinterpret_cast<const XMLByte*>(
 															feedData.c_str()), feedData.size(), "");
-		xercesc_2_8::XercesDOMParser parser;
-		parser.setValidationScheme(xercesc_2_8::XercesDOMParser::Val_Never);
+		xercesc_3_1::XercesDOMParser parser;
+		parser.setValidationScheme(xercesc_3_1::XercesDOMParser::Val_Never);
 		parser.parse(input);
 		if (!parser.getDocument()->hasChildNodes() ||
 			!parser.getDocument()->getChildNodes()->item(0)->hasChildNodes())
@@ -134,18 +134,18 @@ namespace FeedReader
 			return;
 		}
 
-		const xercesc_2_8::DOMNodeList* const children = 
+		const xercesc_3_1::DOMNodeList* const children = 
 							parser.getDocument()->getChildNodes()->item(0)->getChildNodes();
 		for (XMLSize_t i = 0, listLength = children->getLength(); i < listLength; ++i)
 		{
-			const xercesc_2_8::DOMNode* const node = children->item(i);
+			const xercesc_3_1::DOMNode* const node = children->item(i);
 			const std::string nodeName = XmlCharsToStdString(node->getNodeName());
 
 			if (nodeName == XERCESC_EMPTY_NODE_NAME)
 			{
 				continue;
 			}
-			if (xercesc_2_8::XMLString::equals(nodeName.c_str(), "entry"))
+			if (xercesc_3_1::XMLString::equals(nodeName.c_str(), "entry"))
 			{
 				AddEntryToList(node);
 			}

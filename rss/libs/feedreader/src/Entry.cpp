@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 namespace FeedReader
 {
-	Entry::Entry(const xercesc_2_8::DOMNode* const entryNode) :
+	Entry::Entry(const xercesc_3_1::DOMNode* const entryNode) :
 		UniqueId(),
 		Published(boost::date_time::min_date_time),
 		IsLive(true)
@@ -71,12 +71,12 @@ namespace FeedReader
 		return *this;
 	}
 
-	void Entry::ParseNodeData(const xercesc_2_8::DOMNode* const entryNode)
+	void Entry::ParseNodeData(const xercesc_3_1::DOMNode* const entryNode)
 	{
-		const xercesc_2_8::DOMNodeList* const children = entryNode->getChildNodes();
+		const xercesc_3_1::DOMNodeList* const children = entryNode->getChildNodes();
 		for (XMLSize_t i = 0, listLength = children->getLength(); i < listLength; ++i)
 		{
-			const xercesc_2_8::DOMNode* const node = children->item(i);
+			const xercesc_3_1::DOMNode* const node = children->item(i);
 			const std::string nodeName = XmlCharsToStdString(node->getNodeName());
 			const std::string textContent = XmlCharsToStdString(node->getTextContent());
 
@@ -84,12 +84,12 @@ namespace FeedReader
 			{
 				continue;
 			}
-			if (xercesc_2_8::XMLString::equals(nodeName.c_str(), "entryUniqueId"))
+			if (xercesc_3_1::XMLString::equals(nodeName.c_str(), "entryUniqueId"))
 			{
 				UniqueId = textContent;
 				m_entryElements["entryUniqueId"] = textContent; 
 			}
-			else if (xercesc_2_8::XMLString::equals(nodeName.c_str(), "publishDateTime"))
+			else if (xercesc_3_1::XMLString::equals(nodeName.c_str(), "publishDateTime"))
 			{
 				Published = boost::posix_time::microsec_clock::universal_time();
 				m_entryElements["publishDateTime"] = textContent; 

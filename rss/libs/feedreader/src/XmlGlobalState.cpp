@@ -42,22 +42,22 @@ namespace FeedReader
 	{
 		try
 		{
-			xercesc_2_8::XMLPlatformUtils::Initialize();
-			xalanc_1_10::XalanTransformer::initialize();
+			xercesc_3_1::XMLPlatformUtils::Initialize();
+			xalanc_1_11::XalanTransformer::initialize();
 		}
-		catch(const xercesc_2_8::XMLException &xe)
+		catch(const xercesc_3_1::XMLException &xe)
 		{
-			char* message = xercesc_2_8::XMLString::transcode( xe.getMessage() ) ;
+			char* message = xercesc_3_1::XMLString::transcode( xe.getMessage() ) ;
 			std::cout << "Error during Xerces-c Initialization: "
 					  << message << std::endl;
-			xercesc_2_8::XMLString::release( &message ) ;
+			xercesc_3_1::XMLString::release( &message ) ;
 			throw;
 		}
 	}
 
 	XmlGlobalState::~XmlGlobalState()
 	{
-		xalanc_1_10::XalanTransformer::terminate();
-		xercesc_2_8::XMLPlatformUtils::Terminate();
+		xalanc_1_11::XalanTransformer::terminate();
+		xercesc_3_1::XMLPlatformUtils::Terminate();
 	}
 }

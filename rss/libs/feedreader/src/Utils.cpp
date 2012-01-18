@@ -45,9 +45,9 @@ namespace FeedReader
 
 	std::string XmlCharsToStdString(const XMLCh* const xmlChars)
 	{
-		char* stdChars = xercesc_2_8::XMLString::transcode(xmlChars);
+		char* stdChars = xercesc_3_1::XMLString::transcode(xmlChars);
 		const std::string result = std::string(stdChars);
-		xercesc_2_8::XMLString::release(&stdChars);
+		xercesc_3_1::XMLString::release(&stdChars);
 		return result;
 	}
 
