@@ -5,10 +5,10 @@
 #include <QtGui/QPainter>
 #include <QtGui/QStyleOptionGraphicsItem>
 
-Button::Button(const QPixmap &pixmap, QGraphicsItem *parent) : QGraphicsWidget(parent), _pix(pixmap) {
+Button::Button(const QPixmap &pixmap, const Article &article, QGraphicsItem *parent) : QGraphicsWidget(parent), _pix(pixmap), _article(article) {
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
-    _front = false;
+	_front = false;
 }
 
 QPainterPath Button::shape() const {
@@ -59,4 +59,8 @@ void Button::mousePressEvent(QGraphicsSceneMouseEvent *) {
 
 void Button::mouseReleaseEvent(QGraphicsSceneMouseEvent *) {
     update();
+}
+
+void Button::changePixmap(const QPixmap &pixmap) {
+	_pix = pixmap;
 }

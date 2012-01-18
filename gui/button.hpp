@@ -3,12 +3,14 @@
 
 #include <QtGui/QGraphicsWidget>
 
+#include "article.hpp"
+
 class Button : public QGraphicsWidget {
 
     Q_OBJECT
 
 public:
-    Button(const QPixmap &pixmap, QGraphicsItem *parent = 0);
+	Button(const QPixmap &pixmap, const Article &article, QGraphicsItem *parent = 0);
 
     QPainterPath shape() const;
 
@@ -26,6 +28,12 @@ public:
         _gridGeometry = geometry;
     }
 
+	inline Article getArticle() const {
+		return _article;
+	}
+
+	void changePixmap(const QPixmap &pixmap);
+
 public slots:
     void setBack();
     void setFront();
@@ -41,6 +49,7 @@ private:
     QPixmap _pix;
     bool    _front;
     QRectF  _gridGeometry;
+	Article _article;
 };
 
 #endif // BUTTON_HPP

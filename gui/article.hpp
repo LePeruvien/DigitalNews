@@ -21,6 +21,7 @@ public:
     void setContent(const QString &text);
 
     QPixmap draw(const QRect &size) const;
+	QPixmap drawPreview(const QRect &size) const;
 
 private:
 	QString _title;
