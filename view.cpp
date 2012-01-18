@@ -8,14 +8,20 @@
 
 #include <QtCore/QDebug>
 
+#include "settings.hpp"
+
 View::View(QGraphicsScene *parent, const QSize &size) : QGraphicsView(parent) {
     resize(size);
+    setBackgroundBrush(Qt::black);
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     _topBar = new TopBar(QSize(size.width(), size.height() / 15));
     _topBar->setPos(0, 0);
     scene()->addItem(_topBar);
     _cptArticles = 0;
     _actButton = NULL;
+    QPen p(Settings::topBackroundColor());
+    p.setWidth(3);
+    scene()->addRect(0, size.height() / 15, size.width(), size.height() / 15 * 14, p, Qt::lightGray);
 }
 
 void View::addArticle(const Article &article) {
