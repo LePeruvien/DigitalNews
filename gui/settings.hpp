@@ -15,7 +15,7 @@ public:
     }
 
     static QColor articleBackgroundColor() {
-        return QColor(0xFF, 0xFF, 0xFF, 0xFF);
+        return QColor(0xFF, 0xFF, 0xFF);
     }
 
     static QColor hourColor() {
