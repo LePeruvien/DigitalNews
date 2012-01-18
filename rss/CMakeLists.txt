@@ -4,10 +4,13 @@ PROJECT(DigitalNews-rss)
 
 SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../CMake/;${CMAKE_MODULE_PATH}")
 
+FIND_PACKAGE(Boost COMPONENTS filesystem system REQUIRED)
+FIND_PACKAGE(XalanC REQUIRED)
 FIND_PACKAGE(XercesC REQUIRED)
 
 INCLUDE_DIRECTORIES(
 	libs/feedreader/include/feedreader
+	${XALAN_INCLUDE_DIR}
 	${XERCESC_INCLUDE}
 )
 
@@ -36,8 +39,19 @@ ADD_LIBRARY(
 	libs/feedreader/include/feedreader/XmlGlobalState.hpp
 )
 
+ADD_EXECUTABLE(
+	rss
+	src/main.cpp
+)
+
 TARGET_LINK_LIBRARIES(
 	feedreader
+	${Boost_LIBRARIES}
+	${XALAN_LIBRARIES}
 	${XERCESC_LIBRARY}
 )
 
+TARGET_LINK_LIBRARIES(
+	rss-ivy
+	feedreader
+)

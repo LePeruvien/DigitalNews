@@ -1,10 +1,12 @@
 *.o
+*~
 *.so
 qrc_*.cpp
 Makefile
 *.pro.user
 moc_*
 DigitalNews
+rss-ivy
 .DS_Store
 cmake_install.cmake
 CMakeFiles
