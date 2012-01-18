@@ -73,7 +73,7 @@ void View::articleClicked() {
         unsigned int w = size().width() / 17;
         unsigned int h = (size().height() - _topBar->size().height()) / 15;
 		QRect rect = QRect(0, 0, 15 * w, 13 * h);
-		btn->changePixmap(btn->getArticle().draw(rect));
+		btn->changePixmap(btn->getArticle().drawArticle(rect));
 		btn->update(rect);
 		animation->setEndValue(QRectF(w, h + _topBar->size().height(), 15 * w, 13 * h));
         animation->start();
