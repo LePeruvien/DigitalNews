@@ -2,11 +2,9 @@
 #include "export_cfg.hpp"
 #include "Feed.hpp"
 
-using namespace std;
-
 int main(int argc, char* argv[])
 {
-	string feed_url;
+	std::string feed_url;
 	std::map<std::string, FeedReader::Entry> articles;
 
 	// validate arguments
@@ -52,14 +50,13 @@ int main(int argc, char* argv[])
 			}*/
 		}
 	}
-	catch (exception& e)
+	catch (std::exception& e)
 	{
-		cout << "Exception: " << e.what() << "\n";
+		std::cout << "Exception: " << e.what() << "\n";
 	}
 	catch (...)
 	{
-		cout << "Unknown exception." << "\n";
+		std::cout << "Unknown exception." << "\n";
 	}
-	cout << articles.size() << " taille " << endl;
 	return 0;
 }
