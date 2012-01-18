@@ -2,6 +2,7 @@
 
 #include "settings.hpp"
 
+#include <QtCore/QDebug>
 #include <QtGui/QPainter>
 #include <QtGui/QStyleOptionGraphicsItem>
 
@@ -18,15 +19,19 @@ QPainterPath Button::shape() const {
 }
 
 void Button::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-    bool down = option->state & QStyle::State_Sunken;
     QRectF r = boundingRect();
     painter->setPen(Qt::NoPen);
     painter->setBrush(_front ? Settings::articleBackgroundColor() : Settings::backroundButton());
     painter->drawRect(r);
     painter->setBrush(Qt::NoBrush);
     if (option->state & QStyle::State_MouseOver) {
-        painter->setPen(QPen(Settings::topBackroundColor(), 3));
-        painter->drawRect(r);
+        if (_front) {
+            painter->setPen(QPen(Settings::topBackroundColor(), 3));
+            painter->drawRect(r);
+        } else {
+            QPixmap background(":/gui/Article_Selection");
+            painter->drawPixmap(r.toRect(), background);
+        }
     } else {
         painter->setPen(QPen(Settings::topBackroundColor(), 1));
         painter->drawRect(r);
