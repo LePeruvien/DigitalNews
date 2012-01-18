@@ -5,9 +5,10 @@
 #include <QtCore/QTime>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
+#include <QtGui/QTransform>
 
 TopBar::TopBar(const QSize &size) : QGraphicsPixmapItem(), _size(size) {
-    QPixmap pix(_size);
+    /*QPixmap pix(_size);
     pix.fill(Qt::transparent);
     QPainter p(&pix);
     QPainter::RenderHints hint = p.renderHints();
@@ -19,6 +20,15 @@ TopBar::TopBar(const QSize &size) : QGraphicsPixmapItem(), _size(size) {
     p.setRenderHints(hint);
     p.drawRect(0, size.height() / 2, size.width(), size.height() / 2);
     p.drawRect(size.height() / 2, 0, size.width() - size.height(), size.height() / 2);
+    p.end();
+    setPixmap(pix);*/
+    QPixmap pix(_size);
+    pix.fill(Qt::transparent);
+    QPainter p(&pix);
+    p.setRenderHint(QPainter::Antialiasing);
+    p.drawPixmap(0, 0, _size.height(), _size.height(), QPixmap(":/gui/Top_Left_Banner").scaled(_size.width(), _size.height()));
+    p.drawPixmap(_size.height(), 0, size.width() - 2 * _size.height(), _size.height(), QPixmap(":/gui/Top_Banner").scaled(_size.width() - 2 * _size.height(), _size.height()));
+    p.drawPixmap(_size.width() - _size.height(), 0, _size.height(), _size.height(), QPixmap(":/gui/Top_Right_Banner"));
     p.end();
     setPixmap(pix);
 }

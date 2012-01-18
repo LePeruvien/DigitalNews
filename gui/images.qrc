@@ -6,4 +6,10 @@
         <file alias="cultureIcon">images/icons/logo_culturel1_100x100.png</file>
         <file alias="economyIcon">images/icons/logo-euros_100x100.jpg</file>
     </qresource>
+    <qresource prefix="/gui">
+        <file alias="Article_Selection">images/Article_Selection.svg</file>
+        <file alias="Top_Banner">images/Top_Banner.svg</file>
+        <file alias="Top_Left_Banner">images/Top_Banner_Corner_Left.svg</file>
+        <file alias="Top_Right_Banner">images/Top_Banner_Corner_Right.svg</file>
+    </qresource>
 </RCC>
