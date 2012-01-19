@@ -36,8 +36,8 @@ void View::addArticle(const Article &article) {
     _articles << article;
     _btns << btn;
     if (_displayed.size() >= 9) {
-        hideBtn(_displayed.last());
-        _displayed.remove(_displayed.size() - 1);
+        hideBtn(_displayed.first());
+        _displayed.remove(0);
     }
 
     QParallelAnimationGroup *group = new QParallelAnimationGroup;
