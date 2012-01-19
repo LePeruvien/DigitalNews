@@ -7,7 +7,6 @@
 #include "button.hpp"
 #include "view.hpp"
 
-
 #include <QtCore/QPropertyAnimation>
 #include <QtGui/QPushButton>
 
@@ -43,7 +42,7 @@ int main(int argc, char* argv[]) {
 
     for (unsigned int i = 3; i < 15; ++i) {
         v.addArticle(article4);
-    }
+	}
 
     return app.exec();
 }

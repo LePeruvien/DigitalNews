@@ -22,6 +22,11 @@ View::View(QGraphicsScene *parent, const QSize &size) : QGraphicsView(parent) {
     QPen p(Settings::topBackroundColor());
     p.setWidth(3);
     scene()->addRect(0, size.height() / 15, size.width(), size.height() / 15 * 14, p, Qt::lightGray);
+
+	poisonIvy = new IvyBinder();
+	connect(poisonIvy, SIGNAL(scrollUpgesture()), this, SLOT(scrollUp()));
+	connect(poisonIvy, SIGNAL(scrollDownGesture()), this, SLOT(scrollDown()));
+	//connect(poisonIvy, SIGNAL(closeGesture()), this, );
 }
 
 void View::addArticle(const Article &article) {

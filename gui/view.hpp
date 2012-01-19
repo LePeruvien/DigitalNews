@@ -8,8 +8,9 @@ class TopBar;
 
 #include <QtGui/QGraphicsView>
 
-class View : public QGraphicsView {
+#include "IvyBinder.hpp"
 
+class View : public QGraphicsView {
     Q_OBJECT
 
 public:
@@ -36,7 +37,9 @@ private:
     Button*             _actButton;
     QVector<Button*>    _btns;
     QVector<Button*>    _displayed;
-    QVector<Article>    _articles;
+	QVector<Article>    _articles;
+
+	IvyBinder *poisonIvy;
 };
 
 static bool waitForSignal(QObject *, const char *, int = 5000);

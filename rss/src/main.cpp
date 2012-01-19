@@ -36,7 +36,8 @@ int main(int argc, char* argv[])
 				std::cout << "UID : " << itr->UniqueId << std::endl;
 				if (articles.find(itr->UniqueId) == articles.end()) {
 					articles.insert(std::pair<std::string, FeedReader::Entry>(itr->UniqueId, *itr));
-					//TODO: send on ivy
+					itr->Print(std::cout);
+					//TODO: send to ivy
 					std::cout << "Ajouté !" << std::endl;
 				} else {
 					std::cout << "Déjà présent." << std::endl;
