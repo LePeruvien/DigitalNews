@@ -9,8 +9,6 @@
 #include <QtCore/QParallelAnimationGroup>
 #include <QtCore/QTimer>
 
-#include <QtCore/QDebug>
-
 View::View(QGraphicsScene *parent, const QSize &size) : QGraphicsView(parent) {
     resize(size);
     setBackgroundBrush(Qt::black);
@@ -37,7 +35,6 @@ void View::addArticle(const Article &article) {
     _btns << btn;
     if (_displayed.size() >= 9) {
         hideBtn(_displayed.first());
-        _displayed.remove(0);
     }
 
     QParallelAnimationGroup *group = new QParallelAnimationGroup;
@@ -71,7 +68,7 @@ void View::hideBtn(Button *btn) {
     animation->setEasingCurve(QEasingCurve::OutExpo);
     btn->setZValue(1);
     animation->setStartValue(btn->geometry());
-    animation->setEndValue(QRect(size().width() + 5, size().height() + 5, btn->size().width(), btn->size().height()));
+    animation->setEndValue(QRect(size().width() + 5, btn->pos().y(), btn->size().width(), btn->size().height()));
     animation->start();
     _displayed.remove(_displayed.indexOf(btn));
 }

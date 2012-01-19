@@ -20,6 +20,10 @@ public:
 	void setContent(const QString &title, const QString &text, Topic topic);
     void setContent(const QString &text);
 
+    inline QString getTitle() const {
+        return _title;
+    }
+
 	QPixmap drawArticle(const QRect &size) const;
 	QPixmap drawPreview(const QRect &size) const;
 
