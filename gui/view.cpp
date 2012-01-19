@@ -118,6 +118,7 @@ void View::scrollDown() {
         qDebug() << "displayed size : " << _displayed.size();
         unsigned int col = _displayed.size() % 3;
         _displayed << btn;
+        qDebug() << "displayed size : " << _displayed.size();
         qDebug() << "col : " << col;
         btn->setPos(col * w, 3 * h + _topBar->size().height());
         qDebug() << btn->geometry();
@@ -131,7 +132,6 @@ void View::scrollDown() {
 
     group->start();
     waitForSignal(group, SIGNAL(finished()));
-    _displayed.remove(0, 3);
 }
 
 void View::scrollUp() {
