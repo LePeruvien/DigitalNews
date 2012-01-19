@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     v.addArticle(article2);
     v.addArticle(article3);
 
-    for (unsigned int i = 3; i < 10; ++i) {
+    for (unsigned int i = 3; i < 11; ++i) {
         v.addArticle(article4);
     }
 

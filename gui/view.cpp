@@ -6,6 +6,7 @@
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QPropertyAnimation>
+#include <QtCore/QParallelAnimationGroup>
 #include <QtCore/QTimer>
 
 #include <QtCore/QDebug>
@@ -39,9 +40,9 @@ void View::addArticle(const Article &article) {
         _displayed.remove(_displayed.size() - 1);
     }
 
+    QParallelAnimationGroup *group = new QParallelAnimationGroup;
     foreach(Button* dispBtn, _displayed) {
         unsigned int col = (size().width() % (int)(dispBtn->pos().x() > 0 ? dispBtn->pos().x() : 1)) + 1;
-        unsigned int row = (size().height() % (int)(dispBtn->pos().y() - _topBar->size().height() > 0 ? dispBtn->pos().y() - _topBar->size().height() : 1)) + 1;
         QPropertyAnimation *animation = new QPropertyAnimation(dispBtn, "geometry");
         animation->setDuration(500);
         animation->setEasingCurve(QEasingCurve::OutExpo);
@@ -50,8 +51,7 @@ void View::addArticle(const Article &article) {
             animation->setEndValue(QRect(dispBtn->pos().x() + w, dispBtn->pos().y(), w, h));
         else
             animation->setEndValue(QRect(0, dispBtn->pos().y() + h, w, h));
-        animation->start();
-        waitForSignal(animation, SIGNAL(finished()));
+        group->addAnimation(animation);
     }
 
     QPropertyAnimation *animation = new QPropertyAnimation(btn, "geometry");
@@ -59,8 +59,9 @@ void View::addArticle(const Article &article) {
     animation->setEasingCurve(QEasingCurve::OutExpo);
     animation->setStartValue(btn->geometry());
     animation->setEndValue(QRect(0, _topBar->size().height(), w, h));
-    animation->start();
-    waitForSignal(animation, SIGNAL(finished()));
+    group->addAnimation(animation);
+    group->start();
+    waitForSignal(group, SIGNAL(finished()));
     _displayed << btn;
 }
 
