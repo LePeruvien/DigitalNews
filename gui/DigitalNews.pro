@@ -2,8 +2,8 @@
 TEMPLATE = app
 CONFIG += console
 
-LIBS += -lIvy -lIvy_Qt
-LIBS += -L/home/moi/Dev/utils/Ivy-c++/trunk
+LIBS += -lIvy
+LIBS += -L/usr/lib64
 
 SOURCES += main.cpp \
     view.cpp \

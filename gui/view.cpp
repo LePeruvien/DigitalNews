@@ -137,6 +137,8 @@ void View::scrollDown() {
 
     group->start();
     waitForSignal(group, SIGNAL(finished()));
+    foreach(Button* btn, toHide)
+        scene()->removeItem(btn);
 }
 
 void View::scrollUp() {
