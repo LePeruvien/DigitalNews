@@ -16,6 +16,7 @@ public:
     explicit View(QGraphicsScene *parent = 0, const QSize &size = QSize());
 
     void addArticle(const Article &article);
+    void hideBtn(Button* btn);
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -25,9 +26,14 @@ private slots:
 	void animationFinished();
 
 private:
-    TopBar*         _topBar;
-    unsigned int    _cptArticles;
-    Button*         _actButton;
+    TopBar*             _topBar;
+    unsigned int        _cptArticles;
+    Button*             _actButton;
+    QVector<Button*>    _btns;
+    QVector<Button*>    _displayed;
+    QVector<Article>    _articles;
 };
+
+static bool waitForSignal(QObject *, const char *, int = 5000);
 
 #endif // VIEW_HPP

@@ -37,12 +37,13 @@ int main(int argc, char* argv[]) {
 	View v(&scene, screen.size());
     v.showFullScreen();
 
-	v.addArticle(article);
-	v.addArticle(article2);
-	v.addArticle(article3);
+    v.addArticle(article);
+    v.addArticle(article2);
+    v.addArticle(article3);
 
-	for (unsigned int i = 3; i < 9; ++i)
-		v.addArticle(article4);
+    for (unsigned int i = 3; i < 10; ++i) {
+        v.addArticle(article4);
+    }
 
     return app.exec();
 }
