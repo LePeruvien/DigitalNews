@@ -9,6 +9,8 @@
 #include <QtCore/QParallelAnimationGroup>
 #include <QtCore/QTimer>
 
+#include <QtCore/QDebug>
+
 View::View(QGraphicsScene *parent, const QSize &size) : QGraphicsView(parent) {
     resize(size);
     setBackgroundBrush(Qt::black);
@@ -73,9 +75,81 @@ void View::hideBtn(Button *btn) {
     _displayed.remove(_displayed.indexOf(btn));
 }
 
+void View::scrollDown() {
+    qDebug() << _displayed.size();
+    if (_displayed.size() <= 6)
+        return;
+    unsigned int w = size().width() / 3;
+    unsigned int h = (size().height() - _topBar->size().height()) / 3;
+    QVector<Button*> toHide;
+    QVector<Button*> toUp;
+    QVector<Button*> toAdd;
+    unsigned int firstDisplayed = _btns.indexOf(_displayed.first());
+    unsigned int firstToAdd = qMax((int)firstDisplayed - 3, 0);
+    unsigned int lastToUp = qMin((int)6, _displayed.size());
+    for (unsigned int i = 0; i < lastToUp; ++i)
+        toUp << _displayed[i];
+    for (unsigned int i = lastToUp; i < lastToUp + 3; ++i)
+        toHide << _displayed[i];
+    for (unsigned int i = firstToAdd; i < firstToAdd + 3; ++i)
+         toAdd << _btns[i];
+
+    QParallelAnimationGroup *group = new QParallelAnimationGroup;
+    foreach (Button* btn, toUp) {
+        QPropertyAnimation *animation = new QPropertyAnimation(btn, "geometry");
+        animation->setDuration(750);
+        animation->setEasingCurve(QEasingCurve::OutExpo);
+        animation->setStartValue(btn->geometry());
+        animation->setEndValue(QRect(btn->pos().x(), btn->pos().y() - h, btn->geometry().width(), btn->geometry().height()));
+        group->addAnimation(animation);
+    }
+
+    foreach (Button* btn, toHide) {
+        QPropertyAnimation *animation = new QPropertyAnimation(btn, "geometry");
+        animation->setDuration(750);
+        animation->setEasingCurve(QEasingCurve::OutExpo);
+        animation->setStartValue(btn->geometry());
+        animation->setEndValue(QRect(btn->pos().x(), -h - 2, btn->geometry().width(), btn->geometry().height()));
+        group->addAnimation(animation);
+        _displayed.remove(_displayed.indexOf(btn));
+    }
+
+    foreach (Button* btn, toAdd) {
+        qDebug() << "displayed size : " << _displayed.size();
+        unsigned int col = _displayed.size() % 3;
+        _displayed << btn;
+        qDebug() << "col : " << col;
+        btn->setPos(col * w, 3 * h + _topBar->size().height());
+        qDebug() << btn->geometry();
+        QPropertyAnimation *animation = new QPropertyAnimation(btn, "geometry");
+        animation->setDuration(750);
+        animation->setEasingCurve(QEasingCurve::OutExpo);
+        animation->setStartValue(btn->geometry());
+        animation->setEndValue(QRect(btn->pos().x(), 2 * h + _topBar->size().height(), btn->geometry().width(), btn->geometry().height()));
+        group->addAnimation(animation);
+    }
+
+    group->start();
+    waitForSignal(group, SIGNAL(finished()));
+    _displayed.remove(0, 3);
+}
+
+void View::scrollUp() {
+
+}
+
 void View::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
     fitInView(sceneRect(), Qt::KeepAspectRatio);
+}
+
+void View::wheelEvent(QWheelEvent *event) {
+    if (event->orientation() == Qt::Horizontal)
+        return;
+    if (event->delta() > 0)
+        scrollUp();
+    else
+        scrollDown();
 }
 
 void View::articleClicked() {

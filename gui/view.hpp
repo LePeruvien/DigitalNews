@@ -18,8 +18,13 @@ public:
     void addArticle(const Article &article);
     void hideBtn(Button* btn);
 
+public slots:
+    void scrollUp();
+    void scrollDown();
+
 protected:
     void resizeEvent(QResizeEvent *event);
+    void wheelEvent(QWheelEvent *event);
 
 private slots:
     void articleClicked();
